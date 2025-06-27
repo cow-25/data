@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Track cow milk data efficiently with entry forms, reports, charts, and filters." />
+    <meta name="keywords" content="cow milk tracker, dairy farm, milk data entry, milk report" />
+    <meta name="author" content="Your Name" />
+    <title>Cow Milk </title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body class="bg-gray-100 font-sans text-gray-800">
+   
+ <script>
+  function _0x33ce(){const _0x189107=['42DcVGRq','437556tmBscm','🔐\x20Enter\x20access\x20code\x20to\x20view\x20this\x20site:','body','8853740kOMCAy','granted','506280JXsCHL','225onLoFD','346328zxHyKo','506eqpemw','301722BxsWpw','1486596EiZDRy','<div\x20style=\x27text-align:center;\x20padding:50px;\x27><h1>🚫\x20Access\x20Denied</h1><p>You\x20are\x20not\x20authorized\x20to\x20view\x20this\x20site.</p></div>','✅\x20Access\x20granted.\x20You\x20won’t\x20need\x20to\x20enter\x20the\x20code\x20again\x20on\x20this\x20device.','getItem','setItem','duhokcowslaff02','4TvtXMy','1188600UxGvOE'];_0x33ce=function(){return _0x189107;};return _0x33ce();}const _0x5250c0=_0x4948;(function(_0x239b80,_0x4c5a25){const _0x4e0593=_0x4948,_0x4068cf=_0x239b80();while(!![]){try{const _0x38a162=parseInt(_0x4e0593(0x9b))/0x1+parseInt(_0x4e0593(0x8e))/0x2*(-parseInt(_0x4e0593(0x9a))/0x3)+-parseInt(_0x4e0593(0x8f))/0x4+-parseInt(_0x4e0593(0x94))/0x5+-parseInt(_0x4e0593(0x90))/0x6*(-parseInt(_0x4e0593(0x91))/0x7)+-parseInt(_0x4e0593(0x98))/0x8*(parseInt(_0x4e0593(0x97))/0x9)+-parseInt(_0x4e0593(0x96))/0xa*(-parseInt(_0x4e0593(0x99))/0xb);if(_0x38a162===_0x4c5a25)break;else _0x4068cf['push'](_0x4068cf['shift']());}catch(_0x1575a7){_0x4068cf['push'](_0x4068cf['shift']());}}}(_0x33ce,0xdc257));const ACCESS_KEY='device_authorized';function _0x4948(_0x506a47,_0x784e6){const _0x33ce9a=_0x33ce();return _0x4948=function(_0x4948c1,_0x4ef11b){_0x4948c1=_0x4948c1-0x8e;let _0x8d81e2=_0x33ce9a[_0x4948c1];return _0x8d81e2;},_0x4948(_0x506a47,_0x784e6);}if(!localStorage[_0x5250c0(0x9e)](ACCESS_KEY)){const pass=prompt(_0x5250c0(0x92));pass===_0x5250c0(0xa0)?(localStorage[_0x5250c0(0x9f)](ACCESS_KEY,_0x5250c0(0x95)),alert(_0x5250c0(0x9d))):document[_0x5250c0(0x93)]['innerHTML']=_0x5250c0(0x9c);}
+</script>
+    <!-- Hero Section -->
+    <header class="bg-white shadow">
+      <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-3xl font-bold text-gray-900">Cow Milk </h1>
+        <p class="text-gray-600">Efficiently manage your dairy entries with reports and analytics</p>
+        <button onclick="scrollToForm()" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Get Started</button>
+      </div>
+    </header>
+
+    <!-- Main Form Section -->
+    <main class="max-w-4xl mx-auto p-4 mt-6 bg-white rounded shadow">
+      <section id="entryForm">
+        <h2 class="text-2xl font-semibold mb-4">New Milk Entry</h2>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label for="type" class="block font-medium">Cow Type</label>
+            <input type="text" id="type" class="mt-1 w-full border border-gray-300 p-2 rounded" required />
+          </div>
+          <div>
+            <label for="litre" class="block font-medium">Litres</label>
+            <input type="number" id="litre" class="mt-1 w-full border border-gray-300 p-2 rounded" required />
+          </div>
+        </div>
+        <div class="mt-4 space-x-2">
+          <button onclick="addEntry()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Add Entry</button>
+          <button onclick="exportToExcel()" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Export CSV</button>
+        </div>
+      </section>
+
+      <!-- Filter Controls -->
+      <section class="mt-8">
+        <h2 class="text-xl font-semibold mb-2">Filter Records</h2>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <div>
+            <label for="filterRange" class="block font-medium">By Time</label>
+            <select id="filterRange" onchange="filterData()" class="mt-1 w-full border border-gray-300 p-2 rounded">
+              <option value="all">All</option>
+              <option value="daily">Daily</option>
+              <option value="weekly">Weekly</option>
+              <option value="monthly">Monthly</option>
+              <option value="yearly">Yearly</option>
+            </select>
+          </div>
+          <div>
+            <label for="fromDate" class="block font-medium">From Date</label>
+            <input type="date" id="fromDate" onchange="filterData()" class="mt-1 w-full border border-gray-300 p-2 rounded" />
+          </div>
+          <div>
+            <label for="toDate" class="block font-medium">To Date</label>
+            <input type="date" id="toDate" onchange="filterData()" class="mt-1 w-full border border-gray-300 p-2 rounded" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Report Table -->
+      <section class="mt-10">
+        <h2 class="text-xl font-semibold mb-4">Milk Report</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full table-auto border-collapse">
+            <thead>
+              <tr class="bg-gray-200">
+                <th class="border p-2">Date</th>
+                <th class="border p-2">Type</th>
+                <th class="border p-2">Litres</th>
+                <th class="border p-2">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="reportBody"></tbody>
+          </table>
+        </div>
+        <div id="totalSummary" class="mt-4 text-sm text-gray-700"></div>
+        <canvas id="milkChart" class="mt-6"></canvas>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center text-sm py-6 text-gray-500 mt-10">
+      &copy; 2025 Cow Milk Tracker. All rights reserved.
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+      let data = JSON.parse(localStorage.getItem("cowData")) || [];
+      let chart;
+
+      window.onload = function () {
+        renderTable(data);
+      };
+
+      function scrollToForm() {
+        document.getElementById("entryForm").scrollIntoView({ behavior: "smooth" });
+      }
+
+      function addEntry() {
+        const type = document.getElementById("type").value.trim();
+        const litre = parseFloat(document.getElementById("litre").value.trim());
+        if (!type || isNaN(litre)) return alert("Please fill all fields correctly.");
+
+        const entry = {
+          date: new Date().toISOString(),
+          type,
+          litre,
+        };
+        data.push(entry);
+        localStorage.setItem("cowData", JSON.stringify(data));
+        renderTable(getFilteredData());
+        document.getElementById("type").value = "";
+        document.getElementById("litre").value = "";
+      }
+
+      function renderTable(filteredData) {
+        const tbody = document.getElementById("reportBody");
+        tbody.innerHTML = "";
+        filteredData.forEach((entry, index) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td class="border p-2">${new Date(entry.date).toLocaleString()}</td>
+            <td class="border p-2">${entry.type}</td>
+            <td class="border p-2">${entry.litre}</td>
+            <td class="border p-2 space-x-2">
+              <button onclick="editEntry(${index})" class="bg-blue-500 text-white px-2 py-1 rounded text-sm">Edit</button>
+              <button onclick="deleteEntry(${index})" class="bg-red-500 text-white px-2 py-1 rounded text-sm">Delete</button>
+            </td>
+          `;
+          tbody.appendChild(row);
+        });
+        updateSummary(filteredData);
+        updateChart(filteredData);
+      }
+
+      function editEntry(index) {
+        const entry = data[index];
+        const type = prompt("Edit Type:", entry.type);
+        const litre = prompt("Edit Litres:", entry.litre);
+        if (type !== null && litre !== null && !isNaN(parseFloat(litre))) {
+          data[index] = { ...entry, type, litre: parseFloat(litre) };
+          localStorage.setItem("cowData", JSON.stringify(data));
+          renderTable(getFilteredData());
+        }
+      }
+
+      function deleteEntry(index) {
+        if (confirm("Delete this entry?")) {
+          data.splice(index, 1);
+          localStorage.setItem("cowData", JSON.stringify(data));
+          renderTable(getFilteredData());
+        }
+      }
+
+      function updateSummary(entries) {
+        let total = 0;
+        let typeTotals = {};
+
+        entries.forEach((entry) => {
+          total += entry.litre;
+          if (!typeTotals[entry.type]) typeTotals[entry.type] = 0;
+          typeTotals[entry.type] += entry.litre;
+        });
+
+        let summary = `Total: ${total.toFixed(2)} Litres<br />`;
+        for (let type in typeTotals) {
+          summary += `${type}: ${typeTotals[type].toFixed(2)} Litres<br />`;
+        }
+        document.getElementById("totalSummary").innerHTML = summary;
+      }
+
+      function exportToExcel() {
+        const rows = [["Date", "Type", "Litres"]];
+        data.forEach((e) => rows.push([new Date(e.date).toLocaleString(), e.type, e.litre]));
+        let csvContent = "data:text/csv;charset=utf-8," + rows.map((e) => e.join(",")).join("\n");
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "cow_milk_data.csv");
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+
+      function getFilteredData() {
+        const range = document.getElementById("filterRange").value;
+        const fromDate = document.getElementById("fromDate").value;
+        const toDate = document.getElementById("toDate").value;
+        const now = new Date();
+
+        return data.filter((entry) => {
+          const entryDate = new Date(entry.date);
+          if (fromDate && entryDate < new Date(fromDate)) return false;
+          if (toDate && entryDate > new Date(toDate)) return false;
+
+          switch (range) {
+            case "daily":
+              return entryDate.toDateString() === now.toDateString();
+            case "weekly":
+              const weekStart = new Date(now);
+              weekStart.setDate(now.getDate() - now.getDay());
+              const weekEnd = new Date(weekStart);
+              weekEnd.setDate(weekStart.getDate() + 7);
+              return entryDate >= weekStart && entryDate < weekEnd;
+            case "monthly":
+              return entryDate.getMonth() === now.getMonth() && entryDate.getFullYear() === now.getFullYear();
+            case "yearly":
+              return entryDate.getFullYear() === now.getFullYear();
+            default:
+              return true;
+          }
+        });
+      }
+
+      function filterData() {
+        const filtered = getFilteredData();
+        renderTable(filtered);
+      }
+
+      function updateChart(entries) {
+        const totals = {};
+        entries.forEach((entry) => {
+          if (!totals[entry.type]) totals[entry.type] = 0;
+          totals[entry.type] += entry.litre;
+        });
+
+        const ctx = document.getElementById("milkChart").getContext("2d");
+        if (chart) chart.destroy();
+
+        chart = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: Object.keys(totals),
+            datasets: [
+              {
+                label: "Litres by Cow Type",
+                data: Object.values(totals),
+                backgroundColor: "rgba(54, 162, 235, 0.5)",
+                borderColor: "rgba(54, 162, 235, 1)",
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            scales: {
+              y: {
+                beginAtZero: true,
+              },
+            },
+          },
+        });
+      }
+    </script>
+  </body>
+</html>
